@@ -101,7 +101,7 @@ const Home = ():JSX.Element => {
                     <div className="row gx-5 justify-content-center">
                         <div className="col-lg-8 col-xl-6">
                             <div className="text-center">
-                                <h2 className="fw-bolder">관광지</h2>
+                                <h2 className="fw-bolder">서울 관광지</h2>
                                 <p className="lead fw-normal text-muted mb-5">서울은 전통과 현대가 조화를 이루는 도시로, 고궁과 마천루, 한강과 남산 등 다양한 명소들이 여행객을 맞이합니다.</p>
                             </div>
                         </div>
