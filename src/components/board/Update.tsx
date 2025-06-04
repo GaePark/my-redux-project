@@ -24,6 +24,11 @@ const Update = ():JSX.Element => {
         })
     }
     const onClickUpdate = async():Promise<void> => {
+        const pwd:string|null = prompt("비밀번호를 입력해주세요")
+        if(pwd!==boardDetail.pwd){
+            alert("비밀번호가 틀립니다.")
+            return
+        }
         try {
             const res = await axios.put('http://localhost/board/update',form)
             if(res.data.result==="yes")
@@ -39,7 +44,7 @@ const Update = ():JSX.Element => {
     }
     return (
         <div className={"container mt-4"} style={{width:"720px"}}>
-            <h3>글쓰기</h3>
+            <h3>글수정</h3>
             <div className={"row"}>
                 <div className={"col"}>
                     <table className={"table border text-center align-middle"}>

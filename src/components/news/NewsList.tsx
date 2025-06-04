@@ -1,4 +1,4 @@
-import {useState, useEffect, Fragment, useRef, use, ChangeEvent} from 'react'
+import {useState, useEffect, Fragment, useRef, use, ChangeEvent, JSX} from 'react'
 import {Link, useNavigate} from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux";
 import axios from "axios";
@@ -11,7 +11,7 @@ interface State {
     link:string
 }
 
-function NewsList(){
+function NewsList():JSX.Element {
     const [fd,setFd] = useState<string>("안전");
     const [search, setSearch] = useState<string>("");
     const [data, setData] = useState<State[]>([]);

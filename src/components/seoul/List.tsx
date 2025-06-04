@@ -1,11 +1,11 @@
-import React, {useEffect,useState} from 'react';
+import React, {JSX, useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
 import {RootState} from "../../store/store";
 import {setSeoulListData} from "../../reducers/seoulSlice";
 import {Link} from "react-router-dom";
 
-const List = () => {
+const List = ():JSX.Element => {
     const [page, setPage] = useState(1);
     const [startPage, setStartPage] = useState(1);
     const [endPage, setEndPage] = useState(1);

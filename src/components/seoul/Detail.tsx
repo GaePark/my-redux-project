@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {JSX, useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
@@ -10,7 +10,7 @@ import TileLayer from 'ol/layer/Tile';
 import { OSM, TileWMS } from 'ol/source';
 import { fromLonLat } from 'ol/proj';
 
-const Detail = () => {
+const Detail = ():JSX.Element => {
     const mapRef = useRef<HTMLDivElement | null>(null);
     const mapInstanceRef = useRef<Map | null>(null);
     const { no } = useParams();
