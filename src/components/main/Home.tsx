@@ -1,6 +1,7 @@
 import React, {Fragment, JSX, useEffect,useState} from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import Card from "../utill/Card";
 
 interface State {
     no:number;
@@ -110,18 +111,7 @@ const Home = ():JSX.Element => {
                     <div className="row gx-5">
                         {
                             seoul.map((seoul,i) => (
-                                <div className="col-lg-4 mb-5" key={i}>
-                                    <div className="card h-100 shadow border-0">
-                                        <img className="card-img-top" src={seoul.poster}
-                                             alt="..." style={{height:"270px"}}/>
-                                        <div className="card-body p-4">
-                                            <Link className="text-decoration-none link-dark stretched-link" to={`/seoul/detail/${seoul.no}`}><h5
-                                                className="card-title mb-3">{seoul.title}</h5></Link>
-                                            <p className="card-text mb-0">{seoul.address}</p>
-                                        </div>
-
-                                    </div>
-                                </div>
+                                <Card poster={seoul.poster} title={seoul.title} address={seoul.address} no={seoul.no} key={i}/>
                             ))
                         }
                     </div>

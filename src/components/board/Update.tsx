@@ -3,18 +3,30 @@ import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {RootState} from "../../store/store";
+import {useParams} from "react-router";
 
+interface formState{
+    name:string,
+    subject:string,
+    content:string,
+    pwd:string,
+    no:string | undefined
+}
+interface UpdateResponse {
+    result: "yes" | "no";
+}
 const Update = ():JSX.Element => {
-    const subRef = useRef(null);
-    const contentRef = useRef(null);
+    const subRef = useRef<HTMLInputElement>(null);
+    const {no} = useParams<{ no: string }>()
+    const contentRef = useRef<HTMLTextAreaElement>(null);
     const nav = useNavigate();
     const {boardDetail} = useSelector((state: RootState) => state.board);
-    const [form, setForm] = useState({
+    const [form, setForm] = useState<formState>({
         name:boardDetail.name,
         subject: boardDetail.subject,
         content: boardDetail.content,
         pwd:boardDetail.pwd,
-        no: boardDetail.no
+        no
     })
     const onChangeForm = (e:ChangeEvent<HTMLInputElement | HTMLTextAreaElement>):void => {
         const {name, value} = e.target;
@@ -30,10 +42,10 @@ const Update = ():JSX.Element => {
             return
         }
         try {
-            const res = await axios.put('http://localhost/board/update',form)
+            const res = await axios.put<UpdateResponse>('http://localhost/board/update',form)
             if(res.data.result==="yes")
             {
-                nav(`/board/detail/${boardDetail.no}`)
+                nav(`/board/detail/${no}`)
             }
             else{
                 alert("게시글 수정을 실패하였습니다.")

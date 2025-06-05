@@ -6,18 +6,35 @@ import {RootState} from "../../store/store";
 import {setBoardDetail} from "../../reducers/boardSlice";
 import {useParams} from "react-router";
 
+interface State {
+    no:number;
+    name:string;
+    subject:string;
+    content:string;
+    pwd:string;
+    regdate:string;
+    hit:number;
+}
+interface DeleteResponse {
+    result: "yes" | "no";
+}
 const Detail = ():JSX.Element => {
     const nav=useNavigate();
-    const {no} = useParams()
+    const {no} = useParams<{ no: string }>()
     const dispatch=useDispatch();
     const {boardDetail} = useSelector((state:RootState) => state.board);
 
-    useEffect(() => {
+    useEffect(():void => {
+        if (!no) {
+            alert("잘못된 접근입니다.");
+            nav("/board/list");
+            return;
+        }
         fetchBoardDetail();
     }, []);
-    const fetchBoardDetail = async () => {
+    const fetchBoardDetail = async ():Promise<void> => {
         try{
-        const res= await axios.get(`http://localhost/board/detail/${no}`);
+        const res= await axios.get<State>(`http://localhost/board/detail/${no}`);
         dispatch(setBoardDetail(res.data));
         }catch (err){
             console.log(err);
@@ -31,7 +48,7 @@ const Detail = ():JSX.Element => {
             alert("비밀번호가 일치하지 않습니다.")
             return
         }
-        const res = await axios.delete(`http://localhost/board/delete/${no}`);
+        const res = await axios.delete<DeleteResponse>(`http://localhost/board/delete/${no}`);
         if(res.data.result==="yes")
         {
             alert("게시글을 삭제하였습니다.")
@@ -71,7 +88,7 @@ const Detail = ():JSX.Element => {
 
                 </div>
                 <div className={"text-end"}>
-                    <button className={"btn btn-success me-1"} onClick={():void | Promise<void> => nav("/board/update")}>수정</button>
+                    <button className={"btn btn-success me-1"} onClick={():void | Promise<void> => nav(`/board/update/${no}`)}>수정</button>
                     <button className={"btn btn-danger me-1"} onClick={onClickDelete}>삭제</button>
                     <button className={"btn btn-primary"} onClick={():void|Promise<void> => nav(-1)}>목록</button>
                 </div>

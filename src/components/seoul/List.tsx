@@ -4,6 +4,7 @@ import axios from 'axios';
 import {RootState} from "../../store/store";
 import {setSeoulListData} from "../../reducers/seoulSlice";
 import {Link} from "react-router-dom";
+import Card from "../utill/Card";
 
 const List = ():JSX.Element => {
     const [page, setPage] = useState(1);
@@ -57,17 +58,8 @@ const List = ():JSX.Element => {
         <div className="container mt-4">
             <div className={"row"}>
                 {
-                    seoulList?.map((seoul,index) => (
-                        <div className="col-md-4 mb-4" key={index}>
-                            <div className="card">
-                                <Link to={`/seoul/detail/${seoul.no}`} className={"text-decoration-none"}>
-                                    <img src={seoul.poster} alt="Lights" className={"card-img-top"} style={{width:"100%",height:"300px",objectFit:"cover"}}/>
-                                    <div className="card-body">
-                                        <p className={"card-text text-center text-dark text-truncate d-inline-block"} style={{width:"100%"}}>{seoul.title}</p>
-                                    </div>
-                                </Link>
-                            </div>
-                        </div>
+                    seoulList?.map((seoul,i) => (
+                        <Card poster={seoul.poster} title={seoul.title} address={seoul.address} no={seoul.no} key={i}/>
                     ))
                 }
                 <ul className={"pagination justify-content-center"}>

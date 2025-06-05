@@ -38,7 +38,7 @@ function App():JSX.Element {
                         <Route path="/board/list" element={<BoardList/>} />
                         <Route path="/board/detail/:no" element={<Detail/>} />
                         <Route path="/board/insert" element={<Insert/>} />
-                        <Route path="/board/update" element={<Update/>} />
+                        <Route path="/board/update/:no" element={<Update/>} />
                         <Route path="/seoul/list" element={<SeoulList/>} />
                         <Route path="/seoul/detail/:no" element={<SeoulDetail/>} />
                         <Route path={"/news/list"} element={<NewsList/>}/>
